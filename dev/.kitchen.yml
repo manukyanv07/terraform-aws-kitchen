@@ -1,0 +1,23 @@
+---
+driver:
+  name: terraform
+  variable_files:
+    - terraform.tfvars
+provisioner:
+  name: terraform
+platforms:
+  - name: aws
+verifier:
+  name: terraform
+  format: doc
+  systems:
+    - name: terraform
+      backend: local
+      attrs_outputs:
+        bucket_name: timestamp-bucket-name
+        timestamp1: timestamp1-key
+        timestamp2: timestamp2-key
+      controls:
+        - s3_bucket
+suites:
+  - name: default
